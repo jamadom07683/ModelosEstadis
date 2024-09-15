@@ -1,0 +1,62 @@
+---
+title: "MiPrimerMD"
+author: "Jesus Amado"
+date: "2024-09-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Primer Trabajo
+
+Vamos a traer los datos guardados en <<titanic.csv>> despues de cargarlos con la libreria readr haremos un analisis del dataset
+
+
+```{r cars}
+library(readr)
+titanic<-read_csv("Datos/titanic (1).csv")
+summary(titanic)
+```
+En el anterior vimos que 'summary' hace un resumen de lo que hace el dataframe
+
+Por otro lado, si queremos ver la dimension de los datos usamos:
+```{r}
+dim(titanic)
+```
+Si quiero inspeccionar las primeras filas usamos:
+```{r}
+head(titanic)
+```
+Quiero aplicar una funcion en cada columna, uso 'sapply' que aqui la veremos en accion identificando cada clase de cada columna:
+```{r}
+sapply(titanic,class)
+```
+###Filtrado de filas
+```{r}
+#Filtrar las filas donde la edad es mayor a 30
+titanic_adultos<- titanic[titanic$Age>30,]
+head(titanic_adultos)                         
+```
+###Crear columnas
+```{r}
+#Crear columna si el pasajero es adulto
+titanic$Adulto<- ifelse(titanic$Age>=18,"Si","No")
+head(titanic)                     
+```
+
+###Guardar datos
+```{r}
+#Guardar en un nuevo csv
+write.csv(titanic,"Datos/titanicModificado.csv",row.names = FALSE)
+```
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
